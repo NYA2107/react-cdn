@@ -1,0 +1,41 @@
+<div id="app"> </div>
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="fetcher.js"></script>
+<script type="text/babel">
+    class Button extends React.Component{
+        render(){
+            return (<button>Submit</button>)
+        }
+    }
+
+    class App extends React.Component{
+
+        state={
+            msg:'Indonesia'
+        }
+
+        async componentDidMount(){
+            let {data, status} = await getTodos()
+        }
+
+        handleChange=(e)=>{
+            this.setState({msg:e.target.value})
+        }
+
+        render(){
+            const {msg} = this.state
+            return(
+                <div>
+                    <input type="text" onChange={this.handleChange}></input>
+                    <h1>{msg}</h1>
+                    <Button/>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<App/>, document.getElementById('app'))
+</script>
